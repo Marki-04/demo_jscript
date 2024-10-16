@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Magasin</title>
+    <link rel="stylesheet" href="magasin.css">
+    <script src="magasin.js" defer></script>
+</head>
+
+<body>
+<h1>Magasin</h1>
+<div id="tableau">
+  <table>
+    <thead>
+      <tr>
+        <th>Objet</th>
+        <th>Puissance Offensive</th>
+        <th>Puissance Défensive</th>
+        <th>Coût</th>
+        <th>Achat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Gros marteau</td>
+        <td>10</td>
+        <td>0</td>
+        <td>50.00 $</td>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td>Casque cornu</td>
+        <td>3</td>
+        <td>6</td>
+        <td>100.00 $</td>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td>Pantoufles discrètes</td>
+        <td>0</td>
+        <td>8</td>
+        <td>200.00 $</td>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td>Sabre laser</td>
+        <td>20</td>
+        <td>-5</td>
+        <td>400.00 $</td>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td>Plastron de receveur</td>
+        <td>15</td>
+        <td>15</td>
+        <td>75.00 $</td>
+        <td><input type="checkbox"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button id="btnAjouter">Acheter</button>
+</div>
+
+<!-- Secion des personnages -->
+<div id="personnage">
+  <h2>Personnages</h2>
+  <img src="pirate.jpg" alt="Personnage" style="width:200px;height:200px">
+  <div class="stats">
+    <select name="pirate" id="selectPirate">
+
+    </select>
+    <p id="attaque_pers">Attaque : </p>
+    <p id="defense_pers">Défense : </p>
+    <p id="argent_pers">Argent : $ </p>
+  </div>
+</div>
+
+<div id="ajouter">
+  <!--Section pour ajouter un item dans le tableau des objets-->
+  <h2>Ajouter un objet au magasin</h2>
+  <form>
+    <!--Formulaire pour ajouter un objet au magasin -->
+    <!--Label du nom -->
+    <label for="name">Nom :</label>
+    <input type="text" id="name" name="name">
+    <!--Label des puissances Défensive et Offensive -->
+    <label for="puissOff">Puissance Offensive :</label>
+    <input type="number" id="puissOff" name="puissOff">
+    <!--(Defensive) -->
+    <label for="puissDeff">Puissance Défensive :</label>
+    <input type="number" id="puissDeff" name="puissDeff">
+    <!--Cout de l'item -->
+    <label for="cout">Coût :</label>
+    <input type="number" id="cout" name="cout">
+
+    <!--Boutons -->
+    <button type="submit">Ajouter</button>
+    <button type="reset">Annuler</button>
+  </form>
+</div>
+
+</body>
+</html>
