@@ -49,7 +49,7 @@ table th {
     font-weight: bold;
 }
 
-#btnAjouter {
+#btnAcheter {
     padding: 10px 20px;
     background-color: #28a745;
     color: white;
@@ -59,7 +59,7 @@ table th {
     font-size: 1.2em;
 }
 
-#btnAjouter:hover {
+#btnAcheter:hover {
     background-color: #218838;
 }
 

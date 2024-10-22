@@ -37,6 +37,9 @@ function afficherInfoPersonnage(nomPersonnage) {
     }
 }
 
+// Afficher le premier personnage de la classe
+afficherInfoPersonnage(personnages[0].nom);
+
 // Ajouter l'événement "change" pour detecter le changement de personnages
 selectbalise.addEventListener('change', function() {
     const nomPersonnage = this.value; // Récupérer la valeur sélectionnée
@@ -44,29 +47,97 @@ selectbalise.addEventListener('change', function() {
 });
 
 
-// Achat au magasin
-const items_achetes = [];
-
-document.getElementById("btnAjouter").addEventListener("click", function () {
+document.getElementById("btnAcheter").addEventListener("click", function () {
     const table = document.getElementById("tableau");
     const rangees = table.querySelectorAll('tbody tr');
     const selectpers = document.getElementById('selectPirate');
-    const personnge = selectpers.textContent;
+    const personnageAchat = personnages.find(p => p.nom === selectpers.value);
 
-    rangees.forEach((row, index)=>{
-        const checkbox = row.getElementsByTagName('input');
-        if (checkbox.checked){
+    rangees.forEach(row => {
+        const checkbox = row.getElementsByTagName('input')[0];
+        if (checkbox.checked) {
             const nomitem = row.cells[0].textContent;
-            const pvroff = row.cells[1].textContent;
-            const pvrdeff = row.cells[2].textContent;
-            const cout = row.cells[3].textContent;
+            const pvroff = Number(row.cells[1].textContent);
+            const pvrdeff = Number(row.cells[2].textContent);
+            const cout = Number(row.cells[3].textContent.replace(' $', ''));
 
+            if (personnageAchat.argent >= cout) {
+                personnageAchat.atq += pvroff;
+                personnageAchat.def += pvrdeff;
+                personnageAchat.argent -= cout;
 
+                alert(`${nomitem} acheté avec succès!`);
+            } else {
+                alert(`Pas assez d'argent pour acheter ${nomitem}.`);
+            }
         }
-
+        afficherInfoPersonnage(personnageAchat.nom);
     });
 });
 
 // Ajout d'un objet au magasin
+
+// Classe pour le tableau
+function Objet(nom, atq, def, argent) {
+    this.nom = nom;
+    this.atq = atq;
+    this.def = def;
+    this.argent = argent;
+}
+
+// Liste d'objets
+let objets = [];
+
+function AjouterTableau(objets){
+    // Selectionner le tableau
+    let tableaubody = document.querySelector('#tableau tbody');
+
+    //Créer et remplir les cellules avec les objets
+    objets.forEach(function (objet){
+        let newRow = tableaubody.insertRow();
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+        let cell3 = newRow.insertCell(2);
+        let cell4 = newRow.insertCell(3);
+        let cell5 = newRow.insertCell(4);
+
+        // Créer un checkbox
+        let cb = document.createElement("input")
+        cb.setAttribute("type", "checkbox");
+
+        cell1.textContent = objet.nom
+        cell2.textContent = objet.atq
+        cell3.textContent = objet.def
+        cell4.textContent = objet.argent + ' $'
+        cell5.appendChild(cb)
+    })
+}
+
+let obj1 = new Objet("Gros Marteau", 10,12, 23);
+objets.push(obj1);
+AjouterTableau(objets);
+
+
+// Clic sur le bouton Ajouter
+document.getElementById("btnAjouter").addEventListener("click", function () {
+    event.preventDefault();
+
+    // Récuperer les valeurs des champs
+    let nom = document.getElementById("nom").value;
+    let atq = Number(document.getElementById("puissOff").value)
+    let def = Number(document.getElementById("puissDeff").value)
+    let cout = Number(document.getElementById("cout").value)
+
+    // Créer le nouvel Objet
+    const objTemp = new Objet(nom, atq, def, cout);
+    objets.push(objTemp);
+
+    // Afficher le tableau
+    AjouterTableau(objets);
+
+    // Réinitialiser le formulaire
+    document.querySelector('form').reset();
+})
+
 
 // Gestion des alerts
